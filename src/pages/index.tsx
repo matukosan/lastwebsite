@@ -87,7 +87,7 @@ const Home: NextPage = () => {
             <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem] text-transparent bg-clip-text bg-gradient-to-r from-[#5314B3] to-[#d90d0d]">
               Last Website
             </h1>
-            <h2>stack you need!</h2>
+            <h2>starter you need!</h2>
           </div>
 
           <div>
