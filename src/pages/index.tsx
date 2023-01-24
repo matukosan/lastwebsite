@@ -158,7 +158,7 @@ const Home: NextPage = () => {
             </h2>
             <div>This is what your pricing could look like:</div>
           </div>
-          <div className={'flex flex-row gap-4 w-10/12'}>
+          <div className={'grid grid-cols-1 gap-4 md:grid-cols-4 sm:grid-cols-2'}>
             {pricing.map((item) => (
               <div
                 key={item.title}
