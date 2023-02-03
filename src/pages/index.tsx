@@ -2,8 +2,32 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
-import { Button } from "@nextui-org/react";
+import { Button, Badge } from "@nextui-org/react";
 import { FaCheck, FaHeart } from "react-icons/fa";
+
+const FeatureCard = (props: any) => (
+    <div
+      key={props.item.title}
+      className="flex max-w-xs flex-col gap-4 rounded-xl bg-gray-100 p-4"
+    >
+      <h3 className="text-2xl font-bold">{props.item.title}</h3>
+      <div className="text-lg">{props.item.description}</div>
+    </div>
+);
+
+const StackCard = (props: any) => (
+  <Link key={props.item.title} href={props.item.link} target={'__blank'}>
+    <div
+      className="flex max-w-xs flex-col gap-4 rounded-xl bg-gray-100 p-4 text-slate-700 h-full hover:bg-gray-200 transition"
+    >
+      <div className={'flex flex-row justify-between'}>
+        <h3 className="text-2xl font-bold">{props.item.title}</h3>
+        <Image alt={props.item.title} src={props.item.logo} width={'40'} height={'40'}/>
+      </div>
+      <div>{props.item.description}</div>
+    </div>
+  </Link>
+);
 
 const Home: NextPage = () => {
 
@@ -56,7 +80,7 @@ const Home: NextPage = () => {
     {title: 'Vercel', logo: '/vercel.png', description: 'Develop. Preview. Ship.', link: 'https://vercel.com/'},
     {title: 'NextUI', logo: '/nextui.png', description: 'Make beautiful websites regardless of your design experience.', link: 'https://nextui.org/'},
     {title: 'Pirsch Analytics', logo: '/pirsch.svg', description: 'It\'s How Analytics Should Be.', link: 'https://pirsch.io/'},
-    {title: 'Contentful', logo: '/contentful.png', description: 'The freedom to bring your best ideas to life.', link: 'https://www.contentful.com/'},
+    {title: 'Contentful', logo: '/contentful.png', description: 'The freedom to bring your best ideas to life.', link: 'https://www.contentful.com/', badge: true},
   ]
 
   const pricing = [
@@ -73,9 +97,6 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <nav className={'flex flex-row gap-4 justify-end w-full p-4 bg-slate-100'}>
-        {/*<Link href={'/blog'}>*/}
-        {/*  Blog*/}
-        {/*</Link>*/}
         <Link href={'https://github.com/matukosan/lastwebsite'} target={'__blank'}>
           <Image src={'/github.png'} width='20' height='20' alt='github-icon' />
         </Link>
@@ -120,15 +141,13 @@ const Home: NextPage = () => {
           <h2 className={'mb-0 text-white text-transparent bg-clip-text bg-gradient-to-r from-[#5314B3] to-[#d90d0d] pr-1'}>Features</h2>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
             {features.map((item) => (
-              // <Badge disableOutline content="Coming soon" size="md" enableShadow>
-                <div
-                  key={item.title}
-                  className="flex max-w-xs flex-col gap-4 rounded-xl bg-gray-100 p-4"
-                >
-                  <h3 className="text-2xl font-bold">{item.title}</h3>
-                  <div className="text-lg">{item.description}</div>
-                </div>
-              // </Badge>
+              <>{item.badge ? (
+                <Badge disableOutline content="Coming soon" size="md" enableShadow >
+                  <FeatureCard item={item} />
+                </Badge>
+              ) : (
+                <FeatureCard item={item} />
+              )}</>
             ))}
           </div>
 
@@ -138,17 +157,13 @@ const Home: NextPage = () => {
           </h2>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
             {stack.map((item) => (
-              <Link key={item.title} href={item.link} target={'__blank'}>
-                <div
-                  className="flex max-w-xs flex-col gap-4 rounded-xl bg-gray-100 p-4 text-slate-700 h-full hover:bg-gray-200 transition"
-                >
-                  <div className={'flex flex-row justify-between'}>
-                    <h3 className="text-2xl font-bold">{item.title}</h3>
-                    <Image alt={item.title} src={item.logo} width={'40'} height={'40'}/>
-                  </div>
-                  <div>{item.description}</div>
-                </div>
-              </Link>
+              <>{item.badge ? (
+                <Badge disableOutline content="Coming soon" size="md" enableShadow >
+                  <StackCard item={item} />
+                </Badge>
+              ) : (
+                <StackCard item={item} />
+              )}</>
             ))}
           </div>
 
