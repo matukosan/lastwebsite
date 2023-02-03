@@ -5,7 +5,22 @@ import Image from "next/image";
 import { Button, Badge } from "@nextui-org/react";
 import { FaCheck, FaHeart } from "react-icons/fa";
 
-const FeatureCard = (props: any) => (
+type Feature = {
+  title: string;
+  description: string;
+  badge?: boolean;
+}
+
+type StackItem = {
+  title: string;
+  link: string;
+  logo: string;
+  description: string;
+  badge?: boolean;
+}
+
+
+const FeatureCard = (props: { item: Feature }) => (
     <div
       key={props.item.title}
       className="flex max-w-xs flex-col gap-4 rounded-xl bg-gray-100 p-4"
@@ -15,7 +30,7 @@ const FeatureCard = (props: any) => (
     </div>
 );
 
-const StackCard = (props: any) => (
+const StackCard = (props: {item: StackItem}) => (
   <Link key={props.item.title} href={props.item.link} target={'__blank'}>
     <div
       className="flex max-w-xs flex-col gap-4 rounded-xl bg-gray-100 p-4 text-slate-700 h-full hover:bg-gray-200 transition"
@@ -46,7 +61,7 @@ const Home: NextPage = () => {
     }
   ]
 
-  const features = [
+  const features: Feature[] = [
     {
       title: 'Free Hosting',
       description: 'Get started with your website today! No monthly fee.'
@@ -74,7 +89,7 @@ const Home: NextPage = () => {
     }
   ];
 
-  const stack = [
+  const stack: StackItem[] = [
     {title: 'NextJS', logo: '/nextjs.svg', description: 'The React Framework for the Web.', link: 'https://nextjs.org/'},
     {title: 'Tailwind', logo: '/tailwind.png', description: 'Rapidly build modern websites without ever leaving your HTML.', link: 'https://tailwindcss.com/'},
     {title: 'Vercel', logo: '/vercel.png', description: 'Develop. Preview. Ship.', link: 'https://vercel.com/'},
